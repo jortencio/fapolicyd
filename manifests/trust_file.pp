@@ -21,11 +21,13 @@ define fapolicyd::trust_file (
 
   $trusted_apps.each | String $trusted_app | {
     if Deferred('fapolicyd::file_exists', [$trusted_app]) {
+      $file_size = Deferred('fapolicyd::file_size', [$trusted_app])
+      $file_sha256 = Deferred('fapolicyd::file_sha256', [$trusted_app])
+
       file_line { "${title}_${trusted_app}":
         ensure => present,
         path   => $trusted_file_path,
-        line   => "${trusted_app} 
-        ${Deferred('fapolicyd::file_size', [$trusted_app])} ${Deferred('fapolicyd::file_sha256', [$trusted_app])}",
+        line   => "${trusted_app} ${file_size} ${file_sha256}",
         match  => "^${trusted_app}",
         notify => Service['fapolicyd'],
       }
