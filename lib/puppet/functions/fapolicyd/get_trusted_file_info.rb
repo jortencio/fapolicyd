@@ -17,7 +17,7 @@ Puppet::Functions.create_function(:"fapolicyd::get_trusted_file_info") do
       sha = stdout_str.split[0]
       "#{fp} #{size} #{sha}"
     else
-      "##{fp} is trusted but does not currently exist"
+      "##{fp} is trusted but does not currently exist on the machine"
     end
   end
 end
