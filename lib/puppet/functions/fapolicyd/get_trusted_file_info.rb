@@ -10,10 +10,14 @@ Puppet::Functions.create_function(:"fapolicyd::get_trusted_file_info") do
   end
 
   def get_trusted_file_info(fp)
-    size = File.size(fp)
-    stdout_str, status = Open3.capture2('/usr/bin/sha256sum', stdin_data: fp)
-    raise unless status.exitstatus == 0
-    sha = stdout_str.split[0]
-    "#{fp} #{size} #{sha}"
+    if File.exist?(fp)
+      size = File.size(fp)
+      stdout_str, status = Open3.capture2('/usr/bin/sha256sum', stdin_data: fp)
+      raise unless status.exitstatus == 0
+      sha = stdout_str.split[0]
+      "#{fp} #{size} #{sha}"
+    else
+      "##{fp} is trusted but does not currently exist"
+    end
   end
 end

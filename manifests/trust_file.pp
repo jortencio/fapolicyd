@@ -20,16 +20,12 @@ define fapolicyd::trust_file (
   }
 
   $trusted_apps.each | String $trusted_app | {
-    if Deferred('fapolicyd::file_exists', [$trusted_app]) {
-      file_line { "${title}_${trusted_app}":
-        ensure => present,
-        path   => $trusted_file_path,
-        line   => Deferred('fapolicyd::get_trusted_file_info', [$trusted_app]),
-        match  => "^${trusted_app}",
-        notify => Service['fapolicyd'],
-      }
-    } else {
-      notify { "Unable to add '${trusted_app}'' to trust file '${title}', the file does not exist": }
+    file_line { "${title}_${trusted_app}":
+      ensure => present,
+      path   => $trusted_file_path,
+      line   => Deferred('fapolicyd::get_trusted_file_info', [$trusted_app]),
+      match  => "^${trusted_app}|^# ${trusted_app}",
+      notify => Service['fapolicyd'],
     }
   }
 }
