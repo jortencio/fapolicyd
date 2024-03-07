@@ -7,7 +7,7 @@
 # @example
 #   fapolicyd::trust_file { 'namevar': }
 define fapolicyd::trust_file (
-  Array[String[1]] $trusted_apps = []
+  Array[Stdlib::Absolutepath] $trusted_apps = []
 ) {
   $trusted_file_path = "/etc/fapolicyd/trust.d/${title}"
 
