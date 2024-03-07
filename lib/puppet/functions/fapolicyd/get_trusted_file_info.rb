@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-require 'open3'
+require_relative '../../../puppet_x/fapolicyd/trustedfile'
 
 # https://github.com/puppetlabs/puppet-specifications/blob/master/language/func-api.md#the-4x-api
 Puppet::Functions.create_function(:"fapolicyd::get_trusted_file_info") do
@@ -10,14 +10,6 @@ Puppet::Functions.create_function(:"fapolicyd::get_trusted_file_info") do
   end
 
   def get_trusted_file_info(fp)
-    if File.exist?(fp)
-      size = File.size(fp)
-      stdout_str, status = Open3.capture2('/usr/bin/sha256sum', stdin_data: fp)
-      raise unless status.exitstatus == 0
-      sha = stdout_str.split[0]
-      "#{fp} #{size} #{sha}"
-    else
-      "##{fp} is trusted but does not currently exist on the machine"
-    end
+    PuppetX::Fapolicyd::TrustedFile.get_file_info(fp)
   end
 end
