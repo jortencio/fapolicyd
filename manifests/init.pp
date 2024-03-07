@@ -4,79 +4,80 @@
 #
 # @param package_ensure
 #
-#   Set the state of the package
+#  Set the state of the package
 # 
 # @param service_ensure
 #
-#   Set the state of the service
+#  Set the state of the service
 #
 # @param service_enable
 #
-#   Set whether the service is enabled/disabled
+#  Set whether the service is enabled/disabled
 #
 # @param permissive
 #
-#
+#  Set to 0 to send policy decision to the kernel for enforcement.  Set to 1 to always allow access even if a policy would block it.
 #
 # @param nice_val
 #
-#
+#  Set a process niceness value scheduler boost
 #
 # @param q_size
 #
-#
+#  Set the queue size for the internal queue that fapolicyd will use.
 #
 # @param uid
 #
-#
+#  Set the uid or name of the user account under which fapolicy should switch to during startup
 #
 # @param gid
 #
-#
+#  Set the gid or name of the group under which fapolicy should switch to during startup
 #
 # @param do_stat_report
 #
-#
+#  Set whether fapolicy do should (1) or should not (0) create a usage statistics policy on shutdown
 #
 # @param detailed_report
 #
-#
+#  Set whether fapolicyd should(1) or should not(0) add subject and object information to the usage statistics report
 #
 # @param db_max_size
 #
-#
+#  Set how many megabytes to allow the trust database to grow to
 #
 # @param subj_cache_size
 #
-#
+#  Set how many entries the subject cache holds
 #
 # @param obj_cache_size
 #
-#
+#  Set how  many entries the object cache holds
 #
 # @param watch_fs
 #
-#
+#  Set a list of file systems that should be watched for access permission
 #
 # @param trust
 #
-#
+#  Set list  of trust back-ends
 #
 # @param integrity
 #
-#
+#  Set the integrity strategy that should be used
 #
 # @param syslog_format
 #
-#
+#  Set the format of the output from the access decision 
 #
 # @param rpm_sha256_only
 #
-#
+#  Set option (0 or 1) for whether the daemon should be forced to only work with SHA256 hashes
 #
 # @param allow_filesystem_mark
 #
-#
+#  Set option (0 or 1) for whether to allow fapolicyd to monitor file access events on the underlying file system when they are bind 
+#  mounted or are overlayed
 #
 # @example
 #   include fapolicyd
@@ -95,9 +96,9 @@ class fapolicyd (
   Integer[1]                             $subj_cache_size = 1549,
   Integer[1]                             $obj_cache_size = 8191,
   Array[String[1]]                       $watch_fs = ['ext2','ext3','ext4','tmpfs','xfs','vfat','iso9660','btrfs'],
-  Array[String[1]]                       $trust = ['rpmdb','file'],
+  Array[Enum['rpmdb,file'],1,2]          $trust = ['rpmdb','file'],
   Enum['none','size','ima','sha256']     $integrity = 'none',
-  Array[String[1]]                       $syslog_format = ['rule','dec','perm','auid','pid','exe',':','path','ftype','trust'],
+  String[1]                              $syslog_format = 'rule,dec,perm,auid,pid,exe,:,path,ftype,trust',
   Integer[0,1]                           $rpm_sha256_only = 0,
   Integer[0,1]                           $allow_filesystem_mark = 0,
 ) {

@@ -12,7 +12,7 @@
   Array[String[1]] $watch_fs,
   Array[String[1]] $trust,
   Enum['none','size','ima','sha256'] $integrity,
-  Array[String[1]] $syslog_format,
+  String[1] $syslog_format,
   Integer[0,1] $rpm_sha256_only,
   Integer[0,1] $allow_filesystem_mark,
 | -%>
@@ -35,6 +35,6 @@ obj_cache_size = <%= $obj_cache_size %>
 watch_fs = <%= join($watch_fs,',') %>
 trust = <%= join($trust,',') %>
 integrity = <%= $integrity %>
-syslog_format = <%= join($syslog_format,',') %>
+syslog_format = <%= $syslog_format %>
 rpm_sha256_only = <%= $rpm_sha256_only %>
 allow_filesystem_mark = <%= $allow_filesystem_mark %>
