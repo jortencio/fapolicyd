@@ -22,19 +22,19 @@
 # See the fapolicyd.conf man page for explanation.
 #
 
-permissive = <%= $permissive -%>
-nice_val = <%= $nice_val -%>
-q_size = <%= $q_size -%>
-uid = <%= $uid -%>
-gid = <%= $gid -%>
-do_stat_report = <%= $do_stat_report -%>
-detailed_report = <%= $detailed_report -%>
-db_max_size = <%= $db_max_size -%>
-subj_cache_size = <%= $subj_cache_size -%>
-obj_cache_size = <%= $obj_cache_size -%>
-watch_fs = <%= join($watch_fs,',') -%>
-trust = <%= join($trust,',') -%>
-integrity = <%= $integrity -%>
-syslog_format = <%= join($syslog_format,',') -%>
-rpm_sha256_only = <%= $rpm_sha256_only -%>
-allow_filesystem_mark = <%= $allow_filesystem_mark -%>
+permissive = <%= $permissive %>
+nice_val = <%= $nice_val %>
+q_size = <%= $q_size %>
+uid = <%= $uid %>
+gid = <%= $gid %>
+do_stat_report = <%= $do_stat_report %>
+detailed_report = <%= $detailed_report %>
+db_max_size = <%= $db_max_size %>
+subj_cache_size = <%= $subj_cache_size %>
+obj_cache_size = <%= $obj_cache_size %>
+watch_fs = <%= join($watch_fs,',') %>
+trust = <%= join($trust,',') %>
+integrity = <%= $integrity %>
+syslog_format = <%= join($syslog_format,',') %>
+rpm_sha256_only = <%= $rpm_sha256_only %>
+allow_filesystem_mark = <%= $allow_filesystem_mark %>
