@@ -22,7 +22,7 @@ describe 'fapolicyd::trust_file' do
       let(:facts) { os_facts }
 
       before(:each) do
-        allow(PuppetX::Fapolicyd::TrustedFile).to receive(:get_file_info).with('/tmp/ls').and_return('/tmp/ls test test')
+        allow(PuppetX::Fapolicyd::TrustedFile).to receive(:get_file_info).with(filepath: '/tmp/ls').and_return('/tmp/ls test test')
       end
 
       it { is_expected.to compile }

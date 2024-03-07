@@ -10,6 +10,6 @@ Puppet::Functions.create_function(:"fapolicyd::get_trusted_file_info") do
   end
 
   def get_trusted_file_info(fp)
-    PuppetX::Fapolicyd::TrustedFile.get_file_info(fp)
+    PuppetX::Fapolicyd::TrustedFile.get_file_info(filepath: fp)
   end
 end
