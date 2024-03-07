@@ -96,7 +96,7 @@ class fapolicyd (
   Integer[1]                             $subj_cache_size = 1549,
   Integer[1]                             $obj_cache_size = 8191,
   Array[String[1]]                       $watch_fs = ['ext2','ext3','ext4','tmpfs','xfs','vfat','iso9660','btrfs'],
-  Array[Enum['rpmdb,file'],1,2]          $trust = ['rpmdb','file'],
+  Array[Enum['rpmdb','file'],1,2]        $trust = ['rpmdb','file'],
   Enum['none','size','ima','sha256']     $integrity = 'none',
   String[1]                              $syslog_format = 'rule,dec,perm,auid,pid,exe,:,path,ftype,trust',
   Integer[0,1]                           $rpm_sha256_only = 0,
