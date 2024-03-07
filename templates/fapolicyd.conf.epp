@@ -10,7 +10,7 @@
   Integer[1] $subj_cache_size,
   Integer[1] $obj_cache_size,
   Array[String[1]] $watch_fs,
-  Array[String[1]] $trust,
+  Array[Enum['rpmdb','file'],1,2] $trust,
   Enum['none','size','ima','sha256'] $integrity,
   String[1] $syslog_format,
   Integer[0,1] $rpm_sha256_only,
