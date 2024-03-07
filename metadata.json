@@ -2,35 +2,18 @@
   "name": "jortencio-fapolicyd",
   "version": "0.1.0",
   "author": "Jason Ortencio",
-  "summary": "",
+  "summary": "A Puppet module for managing fapolicyd",
   "license": "Apache-2.0",
-  "source": "",
+  "source": "https://github.com/jortencio/fapolicyd",
   "dependencies": [
 
   ],
   "operatingsystem_support": [
     {
-      "operatingsystem": "CentOS",
-      "operatingsystemrelease": [
-        "7"
-      ]
-    },
-    {
-      "operatingsystem": "OracleLinux",
-      "operatingsystemrelease": [
-        "7"
-      ]
-    },
-    {
       "operatingsystem": "RedHat",
       "operatingsystemrelease": [
-        "8"
-      ]
-    },
-    {
-      "operatingsystem": "Scientific",
-      "operatingsystemrelease": [
-        "7"
+        "8",
+        "9"
       ]
     }
   ],

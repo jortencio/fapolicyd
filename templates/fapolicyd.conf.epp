@@ -1,0 +1,40 @@
+<%- |
+  Integer[0,1] $permissive,
+  Integer[0,20] $nice_val,
+  Integer[1] $q_size,
+  String[1] $uid,
+  String[1] $gid,
+  Integer[0,1] $do_stat_report,
+  Integer[0,1] $detailed_report,
+  Integer[1] $db_max_size,
+  Integer[1] $subj_cache_size,
+  Integer[1] $obj_cache_size,
+  Array[String[1]] $watch_fs,
+  Array[Enum['rpmdb','file'],1,2] $trust,
+  Enum['none','size','ima','sha256'] $integrity,
+  String[1] $syslog_format,
+  Integer[0,1] $rpm_sha256_only,
+  Integer[0,1] $allow_filesystem_mark,
+| -%>
+# Managed by Puppet
+#
+# This file controls the configuration of the file access policy daemon.
+# See the fapolicyd.conf man page for explanation.
+#
+
+permissive = <%= $permissive %>
+nice_val = <%= $nice_val %>
+q_size = <%= $q_size %>
+uid = <%= $uid %>
+gid = <%= $gid %>
+do_stat_report = <%= $do_stat_report %>
+detailed_report = <%= $detailed_report %>
+db_max_size = <%= $db_max_size %>
+subj_cache_size = <%= $subj_cache_size %>
+obj_cache_size = <%= $obj_cache_size %>
+watch_fs = <%= join($watch_fs,',') %>
+trust = <%= join($trust,',') %>
+integrity = <%= $integrity %>
+syslog_format = <%= $syslog_format %>
+rpm_sha256_only = <%= $rpm_sha256_only %>
+allow_filesystem_mark = <%= $allow_filesystem_mark %>
