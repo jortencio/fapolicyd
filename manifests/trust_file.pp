@@ -1,11 +1,17 @@
-# @summary A short summary of the purpose of this defined type.
+# @summary A type for managing fapolicyd trust files
 #
-# A description of what this defined type does
+# A type for managing fapolicyd trust files under `/etc/fapolicyd/trust.d/`
 #
 # @param trusted_apps
 #
+#  An array of the absolute path of applications to trust
+#
 # @example
-#   fapolicyd::trust_file { 'namevar': }
+#   fapolicyd::trust_file { 'myapp':
+#     trusted_apps => [
+#       '/tmp/ls',
+#     ],
+#   }
 define fapolicyd::trust_file (
   Array[Stdlib::Absolutepath] $trusted_apps = []
 ) {
