@@ -1,10 +1,8 @@
 # fapolicyd
 
-Welcome to your new module. A short overview of the generated parts can be found
-in the [PDK documentation][1].
+A Puppet module that is used to configure `fapolicyd` on Red Hat Enterprise Linux 8 or 9 systems.
 
-The README template below provides a starting point with details about what
-information to include in your README.
+For more information about `fapolicyd`, please refer to [Introduction to fapolicyd][1]
 
 ## Table of Contents
 
@@ -19,99 +17,96 @@ information to include in your README.
 
 ## Description
 
-Briefly tell users why they might want to use your module. Explain what your
-module does and what kind of problems users can solve with it.
-
-This should be a fairly short description helps the user decide if your module
-is what they want.
+This Puppet module can be used to do a basic installation and configuration of `fapolicyd` - A simple application whitelisting daemon for Linux.
 
 ## Setup
 
-### What fapolicyd affects **OPTIONAL**
+### What fapolicyd affects
 
-If it's obvious what your module touches, you can skip this section. For
-example, folks can probably figure out that your mysql_instance module affects
-their MySQL instances.
+This `fapolicyd` Puppet module currently manages the following configurations:
 
-If there's more that they should know about, though, this is the place to
-mention:
+* Installation of `fapolicyd` package
+* Management of the `fapolicyd` service
+* Configuration of `/etc/fapolicyd/fapolicyd.conf` file
+* Configuration of trusted applications via files under `/etc/fapolicyd/trusted.d/`
+* Configuration of rules via files under `/etc/fapolicyd/rules.d/`
 
-* Files, packages, services, or operations that the module will alter, impact,
-  or execute.
-* Dependencies that your module automatically installs.
-* Warnings or other important notices.
+### Setup Requirements
 
-### Setup Requirements **OPTIONAL**
+In order to use this module, make sure to have the following Puppet modules installed:
 
-If your module requires anything extra before setting up (pluginsync enabled,
-another module, etc.), mention it here.
-
-If your most recent release breaks compatibility or requires particular steps
-for upgrading, you might want to include an additional "Upgrading" section here.
+* `puppetlabs-stdlib`
 
 ### Beginning with fapolicyd
 
-The very basic steps needed for a user to get the module up and running. This
-can include setup steps, if necessary, or it can be an example of the most basic
-use of the module.
+In order to get started with the `fapolicyd` Puppet module to install the `fapolicyd` package and start the `fapolicyd` service with default settings:
+
+```puppet
+include fapolicyd
+```
 
 ## Usage
 
-Include usage examples for common use cases in the **Usage** section. Show your
-users how to use your module to solve problems, and be sure to include code
-examples. Include three to five examples of the most important or common tasks a
-user can accomplish with your module. Show users how to accomplish more complex
-tasks that involve different types, classes, and functions working in tandem.
+For additional information regarding the usage of the `fapolicyd` Puppet module, please refer to [REFERENCES][2]
 
-## Reference
+### Whitelist applications using a trust file under `/etc/fapolicyd/trusted.d/`
 
-This section is deprecated. Instead, add reference information to your code as
-Puppet Strings comments, and then use Strings to generate a REFERENCE.md in your
-module. For details on how to add code comments and generate documentation with
-Strings, see the [Puppet Strings documentation][2] and [style guide][3].
-
-If you aren't ready to use Strings yet, manually create a REFERENCE.md in the
-root of your module directory and list out each of your module's classes,
-defined types, facts, functions, Puppet tasks, task plans, and resource types
-and providers, along with the parameters for each.
-
-For each element (class, defined type, function, and so on), list:
-
-* The data type, if applicable.
-* A description of what the element does.
-* Valid values, if the data type doesn't make it obvious.
-* Default value, if any.
-
-For example:
-
+```puppet
+fapolicyd::trust_file { 'myapp':
+  trusted_apps => [
+    '/tmp/ls',
+    '/tmp/cat',
+  ],
+}
 ```
-### `pet::cat`
 
-#### Parameters
+### Whitelist applications using a rule file under `/etc/fapolicyd/rules.d/`
 
-##### `meow`
-
-Enables vocalization in your cat. Valid options: 'string'.
-
-Default: 'medium-loud'.
+```puppet
+fapolicyd::rule_file { 'myapps':
+  priority => 80,
+  comment  => 'Rules for myapps',
+  rules    => [
+  {
+    decision => 'allow',
+    perm     => 'execute',
+    subjects => [
+      {
+        type    => 'exe',
+        setting => '/usr/bin/bash',
+      },
+      {
+        type    => 'trust',
+        setting => '1',
+      },
+    ],
+    objects  => [
+      {
+        type    => 'path',
+        setting => '/tmp/ls',
+      },
+      {
+        type    => 'ftype',
+        setting => 'application/x-executable'
+      },
+      {
+        type    => 'trust',
+        setting => '0'
+      },
+    ]
+    }
+  ],
+}
 ```
 
 ## Limitations
 
-In the Limitations section, list any incompatibilities, known issues, or other
-warnings.
+This module has only been tested on RedHat 8 and 9 machines
 
 ## Development
 
-In the Development section, tell other users the ground rules for contributing
-to your project and how they should submit their work.
+If you would like to contribute with the development of this module, please feel free to log development changes in the [issues][3] register for this project
 
-## Release Notes/Contributors/Etc. **Optional**
-
-If you aren't using changelog, put your release notes here (though you should
-consider using changelog). You can also add any additional sections you feel are
-necessary or important to include here. Please use the `##` header.
-
-[1]: https://puppet.com/docs/pdk/latest/pdk_generating_modules.html
-[2]: https://puppet.com/docs/puppet/latest/puppet_strings.html
-[3]: https://puppet.com/docs/puppet/latest/puppet_strings_style.html
+[1]: https://access.redhat.com/documentation/en-us/red_hat_enterprise_linux/8/html/security_hardening/assembly_blocking-and-allowing-applications-using-fapolicyd_security-hardening#introduction-to-fapolicyd_assembly_blocking-and-allowing-applications-using-fapolicyd
+[2]: https://forge.puppet.com/modules/jortencio/fapolicyd/reference
+[3]: https://github.com/jortencio/fapolicyd/issues
