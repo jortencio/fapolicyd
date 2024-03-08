@@ -1,0 +1,10 @@
+<%- |
+  String[1] $comment,
+  Array[Fapolicyd::Rule,1] $rules,
+| -%>
+# Managed by Puppet
+<%= "# ${comment}" %>
+
+<% $rules.each | Fapolicyd::Rule $rule | {-%>
+<%= fapolicyd::format_rule($rule) %>
+<% } -%>

@@ -16,6 +16,7 @@ describe 'fapolicyd' do
 
       it { is_expected.to compile.with_all_deps }
       it { is_expected.to contain_package('fapolicyd') }
+      it { is_expected.to contain_file('/etc/fapolicyd/fapolicyd.conf') }
       it { is_expected.to contain_service('fapolicyd') }
     end
   end
