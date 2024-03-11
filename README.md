@@ -51,6 +51,10 @@ For additional information regarding the usage of the `fapolicyd` Puppet module,
 
 ### Whitelist applications using a trust file under `/etc/fapolicyd/trusted.d/`
 
+The following example demonstrates how mark an application as trusted using Puppet.
+
+To mark the applications `/tmp/ls` and `/tmp/cat` as trusted into the file `/etc/fapolicyd/trusted.d/myapp`
+
 ```puppet
 fapolicyd::trust_file { 'myapp':
   trusted_apps => [
@@ -60,7 +64,13 @@ fapolicyd::trust_file { 'myapp':
 }
 ```
 
+For more information regarding trust files, refer to the RedHat documentation for [Marking files as trusted using an additional source of trust][3]
+
 ### Whitelist applications using a rule file under `/etc/fapolicyd/rules.d/`
+
+The following example demonstrates how to add an fapolicyd rule using Puppet.
+
+The fapolicyd rule: `allow perm=execute exe=/usr/bin/bash trust=1 : path=/tmp/ls ftype=application/x-executable trust=0` can be added to the file `/etc/fapolicyd/rules.d/80-myapps.rules` using the following Puppet code:
 
 ```puppet
 fapolicyd::rule_file { 'myapps':
@@ -99,14 +109,18 @@ fapolicyd::rule_file { 'myapps':
 }
 ```
 
+For more information regarding fapolicyd rules, refer to the RedHat documentation for [Adding custom allow and deny rules for fapolicyd][4]
+
 ## Limitations
 
-This module has only been tested on RedHat 8 and 9 machines
+This module has only been tested on RedHat 8 and 9.
 
 ## Development
 
-If you would like to contribute with the development of this module, please feel free to log development changes in the [issues][3] register for this project
+If you would like to contribute with the development of this module, please feel free to log development changes in the [issues][5] register for this project
 
 [1]: https://access.redhat.com/documentation/en-us/red_hat_enterprise_linux/8/html/security_hardening/assembly_blocking-and-allowing-applications-using-fapolicyd_security-hardening#introduction-to-fapolicyd_assembly_blocking-and-allowing-applications-using-fapolicyd
 [2]: https://forge.puppet.com/modules/jortencio/fapolicyd/reference
-[3]: https://github.com/jortencio/fapolicyd/issues
+[3]: https://access.redhat.com/documentation/en-us/red_hat_enterprise_linux/8/html/security_hardening/assembly_blocking-and-allowing-applications-using-fapolicyd_security-hardening#marking-files-as-trusted-using-an-additional-source-of-trust_assembly_blocking-and-allowing-applications-using-fapolicyd
+[4]: https://access.redhat.com/documentation/en-us/red_hat_enterprise_linux/8/html/security_hardening/assembly_blocking-and-allowing-applications-using-fapolicyd_security-hardening#proc_adding-custom-allow-and-deny-rules-for-fapolicyd_assembly_blocking-and-allowing-applications-using-fapolicyd
+[5]: https://github.com/jortencio/fapolicyd/issues
