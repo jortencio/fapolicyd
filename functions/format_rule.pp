@@ -1,5 +1,13 @@
-# See https://puppet.com/docs/puppet/latest/lang_write_functions_in_puppet.html
-# for more information on native puppet functions.
+# @summary A function for formatting a rule to be added to a .rules file
+#
+# @param rule
+#
+#  `Fapolicyd::Rule` type rule to be formatted
+#
+# @return
+#
+# @api private
+#
 function fapolicyd::format_rule(Fapolicyd::Rule $rule) >> String {
   $decision = $rule['decision']
   if $rule['perm'] {

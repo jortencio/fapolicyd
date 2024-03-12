@@ -1,3 +1,4 @@
+# @summary A type for defining a fapolicyd rule
 type Fapolicyd::Rule = Struct[
   'decision' => Enum['allow', 'deny', 'allow_audit', 'deny_audit', 'allow_syslog', 'deny_syslog', 'allow_log', 'deny_log'],
   'perm' => Optional[Enum['open', 'execute', 'any']],

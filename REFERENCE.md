@@ -15,14 +15,16 @@
 
 ### Functions
 
-* [`fapolicyd::format_rule`](#fapolicyd--format_rule): See https://puppet.com/docs/puppet/latest/lang_write_functions_in_puppet.html for more information on native puppet functions.
-* [`fapolicyd::get_trusted_file_info`](#fapolicyd--get_trusted_file_info): https://github.com/puppetlabs/puppet-specifications/blob/master/language/func-api.md#the-4x-api
+#### Private Functions
+
+* `fapolicyd::format_rule`: A function for formatting a rule to be added to a .rules file
+* `fapolicyd::get_trusted_file_info`: A function that returns the trusted application's file information in the format `<file absolute path> <file size> <file sha256 hash>`
 
 ### Data types
 
-* [`Fapolicyd::Object`](#Fapolicyd--Object)
-* [`Fapolicyd::Rule`](#Fapolicyd--Rule)
-* [`Fapolicyd::Subject`](#Fapolicyd--Subject)
+* [`Fapolicyd::Object`](#Fapolicyd--Object): A type for defining a fapolicyd rule object
+* [`Fapolicyd::Rule`](#Fapolicyd--Rule): A type for defining a fapolicyd rule
+* [`Fapolicyd::Subject`](#Fapolicyd--Subject): A type for defining a fapolicyd rule subject
 
 ## Classes
 
@@ -324,51 +326,11 @@ An array of the absolute path of applications to trust
 
 Default value: `[]`
 
-## Functions
-
-### <a name="fapolicyd--format_rule"></a>`fapolicyd::format_rule`
-
-Type: Puppet Language
-
-See https://puppet.com/docs/puppet/latest/lang_write_functions_in_puppet.html
-for more information on native puppet functions.
-
-#### `fapolicyd::format_rule(Fapolicyd::Rule $rule)`
-
-See https://puppet.com/docs/puppet/latest/lang_write_functions_in_puppet.html
-for more information on native puppet functions.
-
-Returns: `String`
-
-##### `rule`
-
-Data type: `Fapolicyd::Rule`
-
-
-
-### <a name="fapolicyd--get_trusted_file_info"></a>`fapolicyd::get_trusted_file_info`
-
-Type: Ruby 4.x API
-
-https://github.com/puppetlabs/puppet-specifications/blob/master/language/func-api.md#the-4x-api
-
-#### `fapolicyd::get_trusted_file_info(String $fp)`
-
-https://github.com/puppetlabs/puppet-specifications/blob/master/language/func-api.md#the-4x-api
-
-Returns: `String`
-
-##### `fp`
-
-Data type: `String`
-
-
-
 ## Data types
 
 ### <a name="Fapolicyd--Object"></a>`Fapolicyd::Object`
 
-The Fapolicyd::Object data type.
+A type for defining a fapolicyd rule object
 
 Alias of
 
@@ -379,7 +341,7 @@ Struct['type' => Enum['all','path','dir','device','ftype','trust','sha256hash'],
 
 ### <a name="Fapolicyd--Rule"></a>`Fapolicyd::Rule`
 
-The Fapolicyd::Rule data type.
+A type for defining a fapolicyd rule
 
 Alias of
 
@@ -392,7 +354,7 @@ Struct['decision' => Enum['allow', 'deny', 'allow_audit', 'deny_audit', 'allow_s
 
 ### <a name="Fapolicyd--Subject"></a>`Fapolicyd::Subject`
 
-The Fapolicyd::Subject data type.
+A type for defining a fapolicyd rule subject
 
 Alias of
 
