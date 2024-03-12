@@ -1,6 +1,6 @@
 {
   "name": "jortencio-fapolicyd",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "author": "Jason Ortencio",
   "summary": "A Puppet module for managing fapolicyd",
   "license": "Apache-2.0",
