@@ -64,7 +64,7 @@ fapolicyd::trust_file { 'myapp':
 }
 ```
 
-For more information regarding trust files, refer to the RedHat documentation for [Marking files as trusted using an additional source of trust][3]
+For more information regarding trust files, refer to the Red Hat Enterprise Linux documentation for [Marking files as trusted using an additional source of trust][3]
 
 ### Whitelist applications using a rule file under `/etc/fapolicyd/rules.d/`
 
@@ -109,11 +109,11 @@ fapolicyd::rule_file { 'myapps':
 }
 ```
 
-For more information regarding fapolicyd rules, refer to the RedHat documentation for [Adding custom allow and deny rules for fapolicyd][4]
+For more information regarding fapolicyd rules, refer to the Red Hat Enterprise Linux documentation for [Adding custom allow and deny rules for fapolicyd][4]
 
 ## Limitations
 
-This module has only been tested on RedHat 8 and 9.
+This module has only been tested on Red Hat Enterprise Linux 8 and 9.
 
 ## Development
 
