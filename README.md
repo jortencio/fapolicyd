@@ -64,6 +64,12 @@ fapolicyd::trust_file { 'myapp':
 }
 ```
 
+Note: If an application being whitelisted does not currently exist on a machine, the trust file will instead include a comment.  Once the application does exist on the machine, the comment will be updated to be a trusted application on the next Puppet run.  The comment included will be similar to the following:
+
+```bash
+#<application path> is trusted but does not currently exist on the machine
+```
+
 For more information regarding trust files, refer to the Red Hat Enterprise Linux documentation for [Marking files as trusted using an additional source of trust][3]
 
 ### Whitelist applications using a rule file under `/etc/fapolicyd/rules.d/`
