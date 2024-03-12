@@ -30,7 +30,7 @@ define fapolicyd::trust_file (
       ensure => present,
       path   => $trusted_file_path,
       line   => Deferred('fapolicyd::get_trusted_file_info', [$trusted_app]),
-      match  => "^${trusted_app}|^# ${trusted_app}",
+      match  => "^${trusted_app}|^#${trusted_app}",
       notify => Service['fapolicyd'],
     }
   }
