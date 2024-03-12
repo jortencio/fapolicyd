@@ -72,7 +72,7 @@ Note: If an application being whitelisted does not currently exist on a machine,
 
 For more information regarding trust files, refer to the Red Hat Enterprise Linux documentation for [Marking files as trusted using an additional source of trust][3]
 
-### Whitelist applications using a rule file under `/etc/fapolicyd/rules.d/`
+### Allow or deny applications using a rule file under `/etc/fapolicyd/rules.d/`
 
 The following example demonstrates how to add an fapolicyd rule using Puppet.
 
